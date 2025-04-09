@@ -10,6 +10,12 @@ En este repositorio se recoge el código utilizado para evalúar el rendimiento 
 - Node
 - 1DCNN
 
+
+## Dataset
+En el estudio original, se utilizaron datos anonimizados de niños entre 6 y 17 años con las respuestas obtenidas en los tests de WISC-IV.
+Dado que el objetivo de este repositorio es meramente referencial, en el archivo `main.py` se genera de manera aleatoria 1000 muestras de manera sintética a modo ilustrativo.
+
+
 ## How to use
 En la carpeta donde se sitúe el archivo main.py deben de existir a su vez dos carpetas más de nombre: "hyperopt" y "results" para volcar la salida de los algoritmos.
 En main.py podemos utilizar las variables globales al principio del fichero para configurar diferentes situaciones (feature engineering, ajuste de hiperparámetros con hyperopt, evaluación de los algoritmos).

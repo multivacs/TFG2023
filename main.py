@@ -16,16 +16,12 @@ import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = '2'
 
 import sys
-script_dir = os.path.dirname(__file__)
-rel_path = f'models'
-path = os.path.join(script_dir, rel_path)
-sys.path.append(path)
 
 # Modelos
-from models.tabnet import TabNet
-from models.tabtransformer import TabTransformer
-from models.node import Node
-from models.DCNN import DCNN
+from .models.tabnet import TabNet
+from .models.tabtransformer import TabTransformer
+from .models.node import Node
+from .models.DCNN import DCNN
 
 # Gráficos
 import matplotlib.pyplot as plt
@@ -57,7 +53,43 @@ CATEGORICAL_FEATURES = []
 FEATURES = list(NUMERIC_FEATURES) + list(CATEGORICAL_FEATURES)
 LABEL = 'ADHD'
 
-df = pd.read_csv('./dataset_nodupl.csv', sep=';', decimal=',')
+# Uso de dataset sintético
+# Definir la cantidad de ejemplos
+n_samples = 1000
+
+# Generar los datos sintéticos para cada columna
+data = {
+    'BD': np.random.randint(4, 11, n_samples),
+    'SI': np.random.randint(7, 16, n_samples),
+    'DS': np.random.randint(3, 16, n_samples),
+    'PCn': np.random.randint(5, 16, n_samples),
+    'CD': np.random.randint(4, 15, n_samples),
+    'VC': np.random.randint(2, 15, n_samples),
+    'LN': np.random.randint(4, 15, n_samples),
+    'MR': np.random.randint(5, 15, n_samples),
+    'CO': np.random.randint(6, 16, n_samples),
+    'SS': np.random.randint(4, 12, n_samples),
+    'VCI': np.random.randint(85, 120, n_samples),
+    'PRI': np.random.randint(65, 115, n_samples),
+    'WMI': np.random.randint(60, 110, n_samples),
+    'PSI': np.random.randint(70, 120, n_samples),
+    'FSIQ': np.random.randint(85, 130, n_samples),
+    'GAI': np.random.randint(80, 125, n_samples),
+    'CPI': np.random.randint(80, 120, n_samples),
+    'GAI-CPI': np.random.randint(-30, 30, n_samples),
+    'WMI-PSI': np.random.randint(-20, 20, n_samples),
+    'GAI-WMI': np.random.randint(-10, 20, n_samples),
+    'GAI-FSIQ': np.random.randint(-30, 30, n_samples),
+    'PRI-CPI': np.random.randint(-20, 20, n_samples),
+    'FSIQ-CPI': np.random.randint(-25, 25, n_samples),
+    'VCI-CPI': np.random.randint(-20, 20, n_samples),
+    'PRI-WMI': np.random.randint(-15, 15, n_samples),
+    'ADHD': np.random.randint(0, 2, n_samples)  # 0 = No TDAH, 1 = TDAH
+}
+
+# Crear un DataFrame
+df = pd.DataFrame(data)
+#df = pd.read_csv('./data/dataset.csv', sep=';', decimal=',')
 
 # Eliminar duplicados
 df.drop_duplicates()
